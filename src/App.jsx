@@ -4,10 +4,10 @@ import { DataContext } from "./context/DataContext";
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
 import Skills from "./components/skills/Skills";
-import Profile from "./components/profile/profile";
-import Projects from "./components/projects/projects";
-import Footer from "./components/footer/footer";
-import Mode from "./components/mode/mode";
+import Profile from "./components/profile/Profile";
+import Projects from "./components/projects/Projects";
+import Footer from "./components/footer/Footer";
+import Mode from "./components/mode/Mode";
 
 import React, { useEffect, useState } from "react";
 import { languages } from "./data/languages";
