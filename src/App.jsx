@@ -3,7 +3,7 @@ import { DataContext } from "./context/DataContext";
 
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
-import Skills from "./components/skills/skills";
+import Skills from "./components/skills/Skills";
 import Profile from "./components/profile/profile";
 import Projects from "./components/projects/projects";
 import Footer from "./components/footer/footer";
