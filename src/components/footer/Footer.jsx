@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 function Footer() {
-  const { content, theme } = useContext(DataContext);
+  const { theme } = useContext(DataContext);
   // first method props + const value
   // second method context + data
   // third method Api + useState
@@ -25,13 +25,17 @@ function Footer() {
       .then((response) => {
         // handle success
         console.log(response);
-        SetFooterInfo(response.data);
+        SetFooterInfo(response.data[0]);
       })
       .catch((error) => {
         // handle error
         console.log(error);
       });
   }, []); // Boş dizi, useEffect'in sadece bileşen yüklendiğinde çalışmasını sağlar
+
+  if (!footerInfo) {
+    return null; // footerInfo yüklenmeden önce bileşeni render etme
+  }
   return (
     <div
       className={`footer-container ${
@@ -43,7 +47,7 @@ function Footer() {
           theme === "dark" ? "footer-container-dark" : ""
         }`}
       >
-        {content.footerInfo.main}
+        {footerInfo.main}
       </h2>
       <div className="contact-info">
         <div
@@ -51,16 +55,12 @@ function Footer() {
             theme === "dark" ? "email-footer-dark" : ""
           }`}
         >
-          <a href={`mailto:${content.footerInfo.email.replace("👉 ", "")}`}>
-            {content.footerInfo.email}
-          </a>
+          <a href={`mailto:${footerInfo.email}`}>{footerInfo.email}</a>
         </div>
         <div className={`links ${theme === "dark" ? "links-dark" : ""}`}>
-          <a href={content.footerInfo.personalBlogLink}>
-            {content.footerInfo.personalBlog}
-          </a>
-          <a href={content.footerInfo.githubLink}>Github</a>
-          <a href={content.footerInfo.linkedinLink}>Linkedin</a>
+          <a href={footerInfo.personalBlogLink}>{footerInfo.personalBlog}</a>
+          <a href={footerInfo.githubLink}>Github</a>
+          <a href={footerInfo.linkedinLink}>Linkedin</a>
         </div>
       </div>
     </div>
