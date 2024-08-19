@@ -1,7 +1,10 @@
 import "./footer.css";
 import { DataContext } from "../../context/DataContext";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Footer() {
   const { theme } = useContext(DataContext);
@@ -29,6 +32,7 @@ function Footer() {
       })
       .catch((error) => {
         // handle error
+        toast.error(error + ".");
         console.log(error);
       });
   }, []); // Boş dizi, useEffect'in sadece bileşen yüklendiğinde çalışmasını sağlar
@@ -36,12 +40,27 @@ function Footer() {
   if (!footerInfo) {
     return null; // footerInfo yüklenmeden önce bileşeni render etme
   }
+
   return (
     <div
       className={`footer-container ${
         theme === "dark" ? "footer-container-dark" : ""
       }`}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
+
       <h2
         className={`footer-title ${
           theme === "dark" ? "footer-container-dark" : ""
