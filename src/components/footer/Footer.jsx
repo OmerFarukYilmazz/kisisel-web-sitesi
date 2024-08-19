@@ -1,10 +1,14 @@
 import "./footer.css";
 import { DataContext } from "../../context/DataContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 function Footer() {
   const { content, theme } = useContext(DataContext);
-  /*
+  // first method props + const value
+  // second method context + data
+  // third method Api + useState
+  /* 
   const footerInfo = {
     email: "👉 omerfaruk2441@gmail.com",
     githubLink: "https://github.com/OmerFarukYilmazz",
@@ -13,7 +17,21 @@ function Footer() {
     main: "Let’s work together on your next product.",
   };
   */
+  const [footerInfo, SetFooterInfo] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get("https://66c25ff7f83fffcb587bcc8b.mockapi.io/footer")
+      .then((response) => {
+        // handle success
+        console.log(response);
+        SetFooterInfo(response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+  }, []); // Boş dizi, useEffect'in sadece bileşen yüklendiğinde çalışmasını sağlar
   return (
     <div
       className={`footer-container ${
